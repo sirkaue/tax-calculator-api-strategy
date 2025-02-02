@@ -1,5 +1,8 @@
-package com.sirkaue.taxcalculatorapistrategy.strategy;
+package com.sirkaue.taxcalculatorapistrategy.strategy.tax;
 
+import org.springframework.stereotype.Component;
+
+@Component("IR")
 public class IRStrategy implements TaxStrategy {
 
     @Override
