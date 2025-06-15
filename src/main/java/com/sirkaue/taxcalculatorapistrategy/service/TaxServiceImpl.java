@@ -1,7 +1,6 @@
 package com.sirkaue.taxcalculatorapistrategy.service;
 
-import com.sirkaue.taxcalculatorapistrategy.dto.TaxRequestDto;
-import com.sirkaue.taxcalculatorapistrategy.dto.TaxResponseDto;
+import com.sirkaue.taxcalculatorapistrategy.domain.TaxType;
 import com.sirkaue.taxcalculatorapistrategy.strategy.context.TaxContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +16,15 @@ public class TaxServiceImpl implements TaxService {
         this.context = context;
     }
 
-    public TaxResponseDto calculateTax(TaxRequestDto request) {
-        log.info("Recebida solicitação para cálculo de imposto: Tipo={}, Valor={}", request.taxType(), request.amount());
-        context.setStrategy(request.taxType());
-        log.info("Estratégia de imposto definida com sucesso: Tipo={}", request.taxType());
+    @Override
+    public double execute(TaxType taxType, double amount) {
+        log.info("Recebida solicitação para cálculo de imposto: Tipo={}, Valor={}", taxType, amount);
+        context.setStrategy(taxType);
+        log.info("Estratégia de imposto definida com sucesso: Tipo={}", taxType);
 
-        Double taxValue = context.calculateTax(request.amount());
+        double taxValue = context.calculate(amount);
         log.info("Imposto calculado com sucesso: Tipo={}, Valor Base={}, Imposto Calculado={}",
-                request.taxType(), request.amount(), taxValue);
-        return new TaxResponseDto(request.taxType(), request.amount(), taxValue);
+                taxType, amount, taxValue);
+        return taxValue;
     }
 }
