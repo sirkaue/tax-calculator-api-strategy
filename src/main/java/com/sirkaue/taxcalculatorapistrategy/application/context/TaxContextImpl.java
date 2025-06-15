@@ -1,7 +1,7 @@
-package com.sirkaue.taxcalculatorapistrategy.strategy.context;
+package com.sirkaue.taxcalculatorapistrategy.application.context;
 
-import com.sirkaue.taxcalculatorapistrategy.domain.TaxType;
-import com.sirkaue.taxcalculatorapistrategy.strategy.tax.TaxStrategy;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.TaxStrategy;
+import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
 
 import java.util.Map;
 
@@ -23,10 +23,10 @@ public class TaxContextImpl implements TaxContext {
     }
 
     @Override
-    public double calculate(double amount) {
+    public double calculateTax(double amount) {
         if (strategy == null) {
             throw new IllegalStateException("No strategy set");
         }
-        return strategy.calculateTax(amount);
+        return strategy.calculate(amount);
     }
 }

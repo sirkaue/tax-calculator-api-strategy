@@ -1,4 +1,4 @@
-package com.sirkaue.taxcalculatorapistrategy;
+package com.sirkaue.strategydemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
