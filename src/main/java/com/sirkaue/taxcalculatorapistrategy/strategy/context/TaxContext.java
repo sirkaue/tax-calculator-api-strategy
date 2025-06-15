@@ -1,7 +1,10 @@
 package com.sirkaue.taxcalculatorapistrategy.strategy.context;
 
-public interface TaxContext {
-    void setStrategy(String taxType);
+import com.sirkaue.taxcalculatorapistrategy.domain.TaxType;
 
-    Double calculateTax(Double amount);
+public interface TaxContext {
+
+    void setStrategy(TaxType taxType);
+
+    double calculate(double amount);
 }
