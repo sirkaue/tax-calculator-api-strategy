@@ -95,15 +95,25 @@ Calcula um imposto com base no tipo e no valor fornecido.
 
 ---
 
-## Como Executar o Projeto
+## 🐳 Como Rodar com Docker
 
-### Pré-requisitos:
-- Java 17+
-- Maven
+Este projeto utiliza um **Dockerfile multi-stage**, separando as etapas de build e runtime para gerar
+uma imagem leve e eficiente.
 
 ### Clonar o repositório:
 ```bash
 git clone https://github.com/sirkaue/tax-calculator-api-strategy.git
+cd tax-calculator-api-strategy
+git checkout layered-architecture
+```
+
+
+### 📦 Build da Imagem
+
+Execute o comando abaixo na raiz do projeto (onde está o `Dockerfile` e o `docker-compose.yml`):
+
+```bash
+docker-compose up --build
 ```
 
 ## Conclusão
