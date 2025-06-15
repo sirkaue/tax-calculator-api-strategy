@@ -1,8 +1,8 @@
 package com.sirkaue.taxcalculatorapistrategy.service;
 
-import com.sirkaue.taxcalculatorapistrategy.dto.TaxRequestDto;
-import com.sirkaue.taxcalculatorapistrategy.dto.TaxResponseDto;
+import com.sirkaue.taxcalculatorapistrategy.domain.TaxType;
 
 public interface TaxService {
-    TaxResponseDto calculateTax(TaxRequestDto request);
+
+    double execute(TaxType taxType, double amount);
 }
