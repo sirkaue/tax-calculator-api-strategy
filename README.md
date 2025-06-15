@@ -14,27 +14,30 @@ O projeto está organizado em camadas para manter uma estrutura limpa e modular:
 
 ### Estrutura de Pastas
 ```plaintext
-tax-calculator
- └── src/main/java/com/sirkaue/taxcalculatorapistrategy
-     ├── controller/                # Controlador da API
-     │   └── TaxController.java
-     ├── dto/                       # Objetos de transferência de dados (DTOs)
-     │   ├── TaxRequestDto.java
-     │   └── TaxResponseDto.java
-     ├── service/                   # Regras de negócio
-     │   └── TaxServiceImpl.java
-     ├── strategy/                  # Implementação do Strategy Pattern
-     │   ├── context/               # Contexto da estratégia
-     │   │   ├── TaxContext.java
-     │   │   └── TaxContextImpl.java
-     │   ├── tax/                   # Estratégias de cálculo de impostos
-     │   │   ├── TaxStrategy.java
-     │   │   ├── ICMSStrategy.java
-     │   │   ├── ISSStrategy.java
-     │   │   └── IRStrategy.java
-     └── TaxCalculatorApplication.java  # Classe principal
- └── resources/
-     └── application.properties  # Configurações do Spring Boot
+.
+└── com.sirkaue.taxcalculatorapistrategy/
+    ├── config/
+    │   └── CalculateTaxConfg.java
+    ├── controller/
+    │   └── TaxController.java
+    ├── domain/
+    │   └── TaxType.java
+    ├── dto/
+    │   ├── TaxRequest.java
+    │   └── TaxResponse.java
+    ├── service/
+    │   ├── TaxService.java
+    │   └── TaxServiceImpl.java
+    ├── strategy/
+    │   ├── context/
+    │   │   ├── TaxContext.java
+    │   │   └── TaxContextImpl.java
+    │   └── tax/
+    │       ├── ICMSStrategy.java
+    │       ├── IRStrategy.java
+    │       ├── ISSStrategy.java
+    │       └── TaxStrategy.java
+    └── TaxCalculatorApiStrategyApplication.java
 ```
 
 ## Componentes Principais
@@ -43,8 +46,8 @@ tax-calculator
 - **TaxController**: Exponibiliza os endpoints da API para o cálculo de impostos.
 
 ### DTOs (Data Transfer Objects):
-- **TaxRequestDto**: Contém os dados de entrada, como o tipo de imposto e o valor.
-- **TaxResponseDto**: Contém os dados de saída, incluindo o valor do imposto calculado.
+- **TaxRequest**: Contém os dados de entrada, como o tipo de imposto e o valor.
+- **TaxResponse**: Contém os dados de saída, incluindo o valor do imposto calculado.
 
 ### Service:
 - **TaxService**: Interface que define as operações relacionadas ao cálculo de impostos.
