@@ -1,6 +1,10 @@
 package com.sirkaue.taxcalculatorapistrategy.strategy.tax;
 
-public interface TaxStrategy {
-    Double calculateTax(Double amount);
-}
+import com.sirkaue.taxcalculatorapistrategy.domain.TaxType;
 
+public interface TaxStrategy {
+
+    TaxType getType();
+
+    double calculateTax(double amount);
+}
