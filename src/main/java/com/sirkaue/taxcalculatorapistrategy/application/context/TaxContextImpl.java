@@ -1,31 +1,28 @@
 package com.sirkaue.taxcalculatorapistrategy.application.context;
 
-import com.sirkaue.taxcalculatorapistrategy.application.ports.out.TaxStrategy;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.factory.TaxStrategyFactory;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy.TaxStrategy;
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
-
-import java.util.Map;
+import com.sirkaue.taxcalculatorapistrategy.domain.exception.StrategyNotFoundException;
 
 public class TaxContextImpl implements TaxContext {
 
-    private final Map<TaxType, TaxStrategy> strategies;
+    private final TaxStrategyFactory factory;
     private TaxStrategy strategy;
 
-    public TaxContextImpl(Map<TaxType, TaxStrategy> strategies) {
-        this.strategies = strategies;
+    public TaxContextImpl(TaxStrategyFactory factory) {
+        this.factory = factory;
     }
 
     @Override
     public void setStrategy(TaxType taxType) {
-        if (taxType == null) {
-            throw new IllegalStateException("Tax type must not be null");
-        }
-        strategy = strategies.get(taxType);
+        strategy = factory.create(taxType);
     }
 
     @Override
     public double calculateTax(double amount) {
         if (strategy == null) {
-            throw new IllegalStateException("No strategy set");
+            throw new StrategyNotFoundException("No strategy set");
         }
         return strategy.calculate(amount);
     }
