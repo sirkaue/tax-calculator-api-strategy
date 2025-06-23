@@ -1,4 +1,4 @@
-package com.sirkaue.taxcalculatorapistrategy.application.ports.out;
+package com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy;
 
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
 
