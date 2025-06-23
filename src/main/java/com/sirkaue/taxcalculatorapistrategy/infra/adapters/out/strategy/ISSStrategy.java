@@ -1,6 +1,6 @@
-package com.sirkaue.taxcalculatorapistrategy.infra.adapters.out;
+package com.sirkaue.taxcalculatorapistrategy.infra.adapters.out.strategy;
 
-import com.sirkaue.taxcalculatorapistrategy.application.ports.out.TaxStrategy;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy.TaxStrategy;
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
 import org.springframework.stereotype.Component;
 
