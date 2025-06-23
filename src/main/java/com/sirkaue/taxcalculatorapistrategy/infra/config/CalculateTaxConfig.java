@@ -3,9 +3,11 @@ package com.sirkaue.taxcalculatorapistrategy.infra.config;
 import com.sirkaue.taxcalculatorapistrategy.application.context.TaxContext;
 import com.sirkaue.taxcalculatorapistrategy.application.context.TaxContextImpl;
 import com.sirkaue.taxcalculatorapistrategy.application.ports.in.CalculateTaxUseCase;
-import com.sirkaue.taxcalculatorapistrategy.application.ports.out.TaxStrategy;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.factory.TaxStrategyFactory;
+import com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy.TaxStrategy;
 import com.sirkaue.taxcalculatorapistrategy.application.usecase.CalculateTaxUseCaseImpl;
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
+import com.sirkaue.taxcalculatorapistrategy.infra.adapters.out.factory.TaxStrategyFactoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +20,13 @@ import java.util.stream.Collectors;
 public class CalculateTaxConfig {
 
     @Bean
-    public TaxContext taxContext(Map<TaxType, TaxStrategy> strategies) {
-        return new TaxContextImpl(strategies);
+    public TaxStrategyFactory taxStrategyFactory(Map<TaxType, TaxStrategy> strategyMap) {
+        return new TaxStrategyFactoryImpl(strategyMap);
+    }
+
+    @Bean
+    public TaxContext taxContext(TaxStrategyFactory factory) {
+        return new TaxContextImpl(factory);
     }
 
     @Bean
