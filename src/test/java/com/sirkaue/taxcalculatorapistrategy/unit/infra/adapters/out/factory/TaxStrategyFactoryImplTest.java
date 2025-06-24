@@ -42,4 +42,16 @@ class TaxStrategyFactoryImplTest {
         // Assert
         assertThrows(IllegalStateException.class, executable);
     }
+
+    @Test
+    void shouldThrowWhenStrategyNotFound() {
+        // Arrange
+        TaxStrategyFactoryImpl factory = new TaxStrategyFactoryImpl(Map.of());
+
+        // Act
+        Executable executable = () -> factory.create(TaxType.ISS);
+
+        // Assert
+        assertThrows(IllegalStateException.class, executable);
+    }
 }
