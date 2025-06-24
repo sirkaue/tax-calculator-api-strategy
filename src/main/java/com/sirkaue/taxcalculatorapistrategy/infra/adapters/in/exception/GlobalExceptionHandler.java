@@ -1,7 +1,5 @@
 package com.sirkaue.taxcalculatorapistrategy.infra.adapters.in.exception;
 
-import com.sirkaue.taxcalculatorapistrategy.domain.exception.StrategyNotFoundException;
-import com.sirkaue.taxcalculatorapistrategy.domain.exception.TaxTypeNullException;
 import com.sirkaue.taxcalculatorapistrategy.infra.adapters.in.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -15,13 +13,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(TaxTypeNullException.class)
-    public ResponseEntity<ErrorResponse> handleTaxTypeNull(TaxTypeNullException ex, HttpServletRequest request) {
-        return createErrorResponse(request, HttpStatus.BAD_REQUEST, ex);
-    }
-
-    @ExceptionHandler(StrategyNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleStrategyNotFound(StrategyNotFoundException ex, HttpServletRequest request) {
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponse> handleStrategyNotSet(IllegalStateException ex, HttpServletRequest request) {
         return createErrorResponse(request, HttpStatus.BAD_REQUEST, ex);
     }
 
