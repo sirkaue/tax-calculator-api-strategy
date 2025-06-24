@@ -19,4 +19,16 @@ class ISSStrategyTest {
         // Assert
         assertEquals(TaxType.ISS, type, "O tipo retornado deve ser ISS");
     }
+
+    @Test
+    void shouldCalculate() {
+        // Arrange
+        double amount = 100.0;
+
+        // Act
+        double result = strategy.calculate(amount);
+
+        // Assert
+        assertEquals(5, result, 0.0001, "O cálculo do ISS deve ser 5% do valor");
+    }
 }
