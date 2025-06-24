@@ -19,4 +19,16 @@ class ICMSStrategyTest {
         // Assert
         assertEquals(TaxType.ICMS, type, "O tipo retornado deve ser ICMS");
     }
+
+    @Test
+    void shouldCalculate() {
+        // Arrange
+        double amount = 100.0;
+
+        // Act
+        double result = strategy.calculate(amount);
+
+        // Assert
+        assertEquals(17.0, result, 0.0001, "O cálculo do ICMS deve ser 17% do valor");
+    }
 }
