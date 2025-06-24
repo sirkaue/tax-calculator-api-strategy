@@ -3,7 +3,6 @@ package com.sirkaue.taxcalculatorapistrategy.application.context;
 import com.sirkaue.taxcalculatorapistrategy.application.ports.out.factory.TaxStrategyFactory;
 import com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy.TaxStrategy;
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
-import com.sirkaue.taxcalculatorapistrategy.domain.exception.StrategyNotFoundException;
 
 public class TaxContextImpl implements TaxContext {
 
@@ -22,7 +21,7 @@ public class TaxContextImpl implements TaxContext {
     @Override
     public double calculateTax(double amount) {
         if (strategy == null) {
-            throw new StrategyNotFoundException("No strategy set");
+            throw new IllegalStateException("No strategy set");
         }
         return strategy.calculate(amount);
     }
