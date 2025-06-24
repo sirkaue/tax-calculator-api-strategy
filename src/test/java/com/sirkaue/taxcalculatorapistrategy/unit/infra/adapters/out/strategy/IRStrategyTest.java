@@ -19,4 +19,16 @@ class IRStrategyTest {
         // Assert
         assertEquals(TaxType.IR, type, "O tipo retornado deve ser IR");
     }
+
+    @Test
+    void shouldCalculate() {
+        // Arrange
+        double amount = 100.0;
+
+        // Act
+        double result = strategy.calculate(amount);
+
+        // Assert
+        assertEquals(27.5, result, 0.0001, "O cálculo do IR deve ser 27.5% do valor");
+    }
 }
