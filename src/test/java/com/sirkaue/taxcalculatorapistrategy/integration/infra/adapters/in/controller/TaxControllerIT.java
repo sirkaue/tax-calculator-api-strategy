@@ -39,4 +39,26 @@ class TaxControllerIT {
                 .andExpect(jsonPath("$.amount").value(100.0))
                 .andExpect(jsonPath("$.totalTaxes").value(17.0));
     }
+
+    @Test
+    void shouldReturn400_whenTaxTypeIsInvalid() throws Exception {
+        // Arrange
+        String invalidRequestJson = """
+        {
+            "taxType": "INVALID",
+            "amount": 100.0
+        }
+        """;
+
+        // Act & Assert
+        mockMvc.perform(post("/api/v1/tax/calculate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidRequestJson))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.error").value("Bad Request"))
+                .andExpect(jsonPath("$.message").exists())
+                .andExpect(jsonPath("$.path").value("/api/v1/tax/calculate"))
+                .andExpect(jsonPath("$.method").value("POST"));
+    }
 }
