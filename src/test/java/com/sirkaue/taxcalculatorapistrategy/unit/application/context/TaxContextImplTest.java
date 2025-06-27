@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,5 +37,25 @@ class TaxContextImplTest {
 
         // Assert
         verify(factory).create(taxType);
+    }
+
+    @Test
+    void shouldCalculateTaxUsingStrategy() {
+        // Arrange
+        TaxType taxType = TaxType.ICMS;
+        double amount = 1000.0;
+        double expectedTax = 170.0;
+
+        when(factory.create(taxType)).thenReturn(strategy);
+        when(strategy.calculate(amount)).thenReturn(expectedTax);
+
+        // Act
+        context.setStrategy(taxType);
+        double result = context.calculateTax(amount);
+
+        // Assert
+        assertEquals(expectedTax, result);
+        verify(factory).create(taxType);
+        verify(strategy).calculate(amount);
     }
 }
