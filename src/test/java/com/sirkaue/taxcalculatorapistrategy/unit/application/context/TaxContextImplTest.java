@@ -6,13 +6,14 @@ import com.sirkaue.taxcalculatorapistrategy.application.ports.out.strategy.TaxSt
 import com.sirkaue.taxcalculatorapistrategy.domain.enums.TaxType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TaxContextImplTest {
@@ -57,5 +58,20 @@ class TaxContextImplTest {
         assertEquals(expectedTax, result);
         verify(factory).create(taxType);
         verify(strategy).calculate(amount);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenStrategyNotSet() {
+        // Arrange
+        TaxStrategyFactory factory = mock(TaxStrategyFactory.class);
+        TaxContextImpl context = new TaxContextImpl(factory);
+
+        // Act
+        Executable executable = () -> context.calculateTax(100.0);
+
+        // Assert
+        assertThrows(IllegalStateException.class, executable);
+
+        verifyNoInteractions(factory);
     }
 }
